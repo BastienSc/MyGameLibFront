@@ -1,0 +1,37 @@
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgb(23,26,33);
+    box-shadow: 0 0 10px rgb(23,26,33);
+  }
+  
+  h1 {
+    margin: 0;
+  }
+  
+  nav {
+    margin-top: 1rem;
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  li {
+    margin: 0 1rem;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #333333;
+    font-weight: bold;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
