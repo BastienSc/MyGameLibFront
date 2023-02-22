@@ -11,5 +11,13 @@
     "games.releaseDate": "Release Date",
     "games.editor": "Editor",
 
-    "addGameButton": "Add a game"
+    "games.addGameButton": "Add a game",
+    "games.searchPlaceHolder": "Search a game...",
+
+    "addGameDialog.title": "Add a game",
+    "addGameDialog.validateButton": "Validate",
+    "addGameDialog.cancelButton": "Cancel",
+    "addGameDialog.namePlaceHolder": "Name",
+    "addGameDialog.descriptionPlaceHolder": "Description",
+    "addGameDialog.releaseDatePlaceHolder": "Release Date"
 }

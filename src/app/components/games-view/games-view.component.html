@@ -1,5 +1,11 @@
-<div class="mat-elevation-z8">
-    <mat-table [dataSource]="dataSource" matSort>
+<div>
+    <div class="table-toolbar">
+        <mat-form-field class="search-field">
+            <input colo matInput placeholder="{{ 'games.searchPlaceHolder' | translate }}" (keyup)="searchGameByName($event)">
+        </mat-form-field>
+        <button  mat-flat-button color="warn" (click)="openAddGameDialog()">{{ 'games.addGameButton' | translate }}</button>
+    </div>
+    <mat-table [dataSource]="dataSource" matSort strect>
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'games.name' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let game">{{ game.name }}</mat-cell>

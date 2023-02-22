@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AddGameDialogComponent } from './components/add-game-dialog/add-game-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -25,7 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderComponent,
     DrawerComponent,
     GamesViewComponent,
-    EditorsViewComponent
+    EditorsViewComponent,
+    AddGameDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -42,8 +53,16 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-      
-      }),
+    }),
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatDialogModule,
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

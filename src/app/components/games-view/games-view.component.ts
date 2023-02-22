@@ -4,6 +4,8 @@ import { ViewType } from 'src/app/shared/constants';
 import { MatTableDataSource } from '@angular/material/table';
 import { GameService } from 'src/app/services/game.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import {MatDialog} from '@angular/material/dialog';
+import { AddGameDialogComponent } from '../add-game-dialog/add-game-dialog.component';
 
 @Component({
   selector: 'app-games-view',
@@ -22,7 +24,7 @@ export class GamesViewComponent implements OnInit{
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<GameDto>([]);
   }
 
@@ -32,14 +34,24 @@ export class GamesViewComponent implements OnInit{
     this.getGames();
   }
 
+  openAddGameDialog(){
+    const dialogRef = this.dialog.open(AddGameDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == null)
+        console.log("Cancelled");
+      else console.log(result);
+    })
+  }
+
+  searchGameByName(event: any): void{ }
+  
   getGames(event: (PageEvent | null) = null) {
     this.pageSize = event?.pageSize ?? this.pageSize;
     this.pageIndex = event?.pageIndex ?? this.pageIndex;
-    console.log("pageSize = ", this.pageSize, " et pageIndex = ", event?.pageIndex)
     this.gameService.getGames(this.pageIndex, this.pageSize).subscribe(response => {
       this.dataSource.data = response.content;
       this.totalGames = response.totalElements;
-      console.log(response);
     });
   }
 }
