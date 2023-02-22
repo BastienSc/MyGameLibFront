@@ -3,12 +3,13 @@ header {
     flex-direction: column;
     align-items: center;
     padding: 1rem;
-    background-color: rgb(23,26,33);
-    box-shadow: 0 0 10px rgb(23,26,33);
+    background-color: #011936;
+    box-shadow: 0 0 10px #011936;
   }
   
   h1 {
     margin: 0;
+    font-size: 35px;
   }
   
   nav {
@@ -23,15 +24,17 @@ header {
   }
   
   li {
-    margin: 0 1rem;
+    margin: 0 3rem;
+    font-size: 20px;
   }
   
   a {
     text-decoration: none;
-    color: #333333;
-    font-weight: bold;
+    color: #566D76;
+    font-weight:400;
   }
   
   a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #F9DC5C;
   }

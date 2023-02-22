@@ -1,4 +1,4 @@
-export interface Editor {
+export interface EditorDto {
     id: number;
     name: string;
 }
