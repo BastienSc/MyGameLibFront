@@ -1,9 +1,11 @@
 <header>
-  <h1>Ma bibliothèque de jeux</h1>
+  <h1>{{ 'header.title' | translate }}</h1>
   <nav>
     <ul>
-      <li><a [routerLink]="['/games']"> MES JEUX</a></li>
-      <li><a [routerLink]="['/editors']">EDITEURS</a></li>
+      <li><a [routerLink]="['/games']">{{ 'header.gamesPart' | translate }}</a></li>
+      <li><a [routerLink]="['/editors']">{{ 'header.editorsPart' | translate }}</a></li>
+      <li><button (click)="useLanguage('fr')">Français</button></li>
+      <li><button (click)="useLanguage('en')">Anglais</button></li>
     </ul>
   </nav>
 </header>

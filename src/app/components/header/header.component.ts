@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 import { DrawerComponent } from '../drawer/drawer.component';
 
 @Component({
@@ -8,4 +9,13 @@ import { DrawerComponent } from '../drawer/drawer.component';
 })
 export class HeaderComponent {
   @Input() drawer!: DrawerComponent;
+
+  constructor(private translate: TranslateService){
+    this.translate.setDefaultLang('fr');
+    this.translate.use('fr');
+  }
+
+  useLanguage(language: string): void {
+    this.translate.use(language);
+  }
 }

@@ -1,0 +1,15 @@
+{
+    "langue.francais": "Francais",
+    "langue.anglais": "Anglais",
+
+    "header.title" : "Ma bibliothèque de jeux",
+    "header.gamesPart" : "JEUX",
+    "header.editorsPart" : "EDITEURS",
+
+    "games.name": "Nom",
+    "games.description": "Description",
+    "games.releaseDate": "Date de sortie",
+    "games.editor": "Editeur",
+
+    "addGameButton": "Ajouter un jeu"
+}

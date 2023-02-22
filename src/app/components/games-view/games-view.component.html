@@ -1,19 +1,19 @@
 <div class="mat-elevation-z8">
     <mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'games.name' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let game">{{ game.name }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>{{ 'games.description' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let game">{{ game.description }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="releaseDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Release Date</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'games.releaseDate' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let game">{{ game.releaseDate | date }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="editorId">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Editor ID</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'games.editor' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let game">{{ game.editorId }}</mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

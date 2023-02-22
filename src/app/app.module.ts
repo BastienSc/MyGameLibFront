@@ -11,7 +11,13 @@ import { GamesViewComponent } from './components/games-view/games-view.component
 import { EditorsViewComponent } from './components/editors-view/editors-view.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -28,7 +34,16 @@ import { HttpClientModule } from '@angular/common/http';
     MatPaginatorModule,
     MatTableModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule, 
+    TranslateModule.forRoot({
+      defaultLanguage: 'fr',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+      
+      }),
   ],
   providers: [],
   bootstrap: [AppComponent]

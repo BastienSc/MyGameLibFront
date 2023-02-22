@@ -1,0 +1,15 @@
+{
+    "langue.francais": "French",
+    "langue.anglais": "English",
+
+    "header.title" : "My game library",
+    "header.gamesPart" : "MY GAMES",
+    "header.editorsPart" : "EDITORS",
+
+    "games.name": "Name",
+    "games.description": "Description",
+    "games.releaseDate": "Release Date",
+    "games.editor": "Editor",
+
+    "addGameButton": "Add a game"
+}
