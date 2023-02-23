@@ -19,4 +19,8 @@ export class GameService {
 
       return this.http.get<Page<GameDto>>(`${API_URL}/game`, {params});
   }
+
+  public getById(id: number): Observable<GameDto>{
+    return this.http.get<GameDto>(`${API_URL}/game/${id}`);
+  }
 }

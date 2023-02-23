@@ -22,6 +22,14 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'games.editor' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let game">{{ game.editorId }}</mat-cell>
       </ng-container>
+      <ng-container matColumnDef="update">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let game">
+          <button mat-icon-button color="primary" (click)="openEditGameDialog(game.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>

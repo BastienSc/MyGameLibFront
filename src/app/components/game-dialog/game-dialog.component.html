@@ -1,7 +1,7 @@
 <mat-card style="text-align: center; color: darkslategray">
   <mat-card-header>
-    <mat-card-title *ngIf="dialogType=='create'"><h1>{{ 'gameDialog.createTitle' | translate }}</h1></mat-card-title>
-    <mat-card-title *ngIf="dialogType=='update'">{{ 'gameDialog.updateTitle' | translate }} {{ game?.name }}</mat-card-title>
+    <mat-card-title *ngIf="dialogType=='create'"><h1>{{ 'gameDialog.createTitle' | translate }}></h1></mat-card-title>
+    <mat-card-title *ngIf="dialogType=='update'"><h1>{{ 'gameDialog.updateTitle' | translate }}{{ game?.name }}</h1></mat-card-title>
   </mat-card-header>
     <mat-card-content>
         <form [formGroup]="form" class="normal-form">
@@ -35,8 +35,8 @@
 
             <mat-form-field class="editor" appearance="fill">
               <mat-label>{{ 'gameDialog.editorPlaceHolder' | translate }}</mat-label>
-              <mat-select (valueChange)="changeEditor($event)">
-                <mat-option *ngFor="let editor of editorList" [value]="editor">
+              <mat-select  [(value)]="selectedEditor">
+                <mat-option *ngFor="let editor of editorList" [value]="editor.id">
                   {{editor.name}}
                 </mat-option>
               </mat-select>

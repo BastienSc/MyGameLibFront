@@ -15,7 +15,7 @@ import { GameDialogComponent } from '../game-dialog/game-dialog.component';
 export class GamesViewComponent implements OnInit{
   public viewType: ViewType = ViewType.list;
 
-  displayedColumns: string[] = ['name', 'description', 'releaseDate', 'editorId'];
+  displayedColumns: string[] = ['name', 'description', 'releaseDate', 'editorId', 'update'];
   dataSource: MatTableDataSource<GameDto>;
   pageSizeOptions = [5, 10, 20];
   pageSize = 5;
@@ -35,12 +35,26 @@ export class GamesViewComponent implements OnInit{
   }
 
   openAddGameDialog(){
-    const dialogRef = this.dialog.open(GameDialogComponent, {data: { dialogType: "update"}});
+    const dialogRef = this.dialog.open(GameDialogComponent);
     
     dialogRef.afterClosed().subscribe(result => {
-      if (result == null)
-        console.log("Cancelled");
-      else console.log(result);
+      if (result != null){
+        const gameToCreate: GameDto = result.game;
+        const medias: File[] = result.medias;
+        //Appeler service pour créer
+      }
+    })
+  }
+
+  openEditGameDialog(gameId: number){
+    const dialogRef = this.dialog.open(GameDialogComponent, {data: {gameId: gameId}})
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null){
+        const gameToCreate: GameDto = result.game;
+        const medias: File[] = result.medias;
+        //Appeler service pour updater
+      }
     })
   }
 

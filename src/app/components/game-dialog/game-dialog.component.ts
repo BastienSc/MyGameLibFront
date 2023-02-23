@@ -5,6 +5,8 @@ import { EditorDto } from 'src/app/models/editorDto';
 import { EditorService } from 'src/app/services/editor.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GameDialogDto } from 'src/app/models/gameDialogDto';
+import { GameService } from 'src/app/services/game.service';
+import { GameDto } from 'src/app/models/gameDto';
 
 
 @Component({
@@ -18,30 +20,44 @@ export class GameDialogComponent implements OnInit{
   @ViewChild('fileUpload') fileUpload!: ElementRef;
 
   editorList: EditorDto[] = [];
-  selectedEditor!: EditorDto;
   fileList: any[] = [];
-  game!: GameDialogDto | null;
+  currentGameId: number | null;
+  game!: GameDto | null;
+  selectedEditor!: number;
 
   constructor(private dialogRef: MatDialogRef<GameDialogComponent>, 
               private editorService: EditorService, 
-              @Inject(MAT_DIALOG_DATA) public data: any){
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private gameService: GameService){
     this.form = GameDialogComponent.buildForm();
     
-    const gameToUpdate = data?.game;
-    if (gameToUpdate == null)
-      this.dialogType = "create";
-    else{
-      this.dialogType = "update";
-      this.game = data.game;
-      this.selectedEditor = data?.game?.editor;
-    }
+    this.currentGameId = data?.gameId;
+    this.dialogType = this.currentGameId == null ? "create" : "update";
   }
 
   ngOnInit(): void {
+    //Si c'est un formulaire de mise à jour, il faut charger les données du jeu pour les afficher
+    if (this.dialogType == "update"){
+      console.log("update")
+      this.gameService.getById(this.currentGameId ?? -1).subscribe(result => {
+        this.game = result;
+        this.fillFormWhenUpdating()
+      });
+
+
+    }
+
     this.editorService.getAllEditors()
-      .subscribe(
-        result => this.editorList = result
+      .subscribe(result => {
+        this.editorList = result;
+        this.selectedEditor = this.game?.editorId ?? -1
+      }
       );
+      console.log(this.game)
+    
+  }
+
+  fillFormWhenUpdating(): void {
     this.form.patchValue({
       name: this.game?.name,
       description: this.game?.description,
@@ -50,11 +66,16 @@ export class GameDialogComponent implements OnInit{
     })
   }
 
-
-  validate(gameDialog: GameDialogDto): void{
-    gameDialog.medias = this.fileList.map(f => f.file);
-    console.log(gameDialog)
-    this.dialogRef.close(this.dialogType);
+  validate(gameDialog: any): void{
+    console.log("event = ", gameDialog)
+    const returnedGame = {
+      name: gameDialog.name,
+      description: gameDialog.description,
+      releaseDate: gameDialog.releaseDate,
+      editorId: this.selectedEditor
+    }
+    console.log(returnedGame);
+    this.dialogRef.close({game: returnedGame, medias: this.fileList.map(f => f.file)});
   }
 
   cancel(): void{
