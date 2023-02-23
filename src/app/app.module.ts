@@ -16,13 +16,15 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { AddGameDialogComponent } from './components/add-game-dialog/add-game-dialog.component';
+import { GameDialogComponent } from './components/game-dialog/game-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core'
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -36,7 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DrawerComponent,
     GamesViewComponent,
     EditorsViewComponent,
-    AddGameDialogComponent
+    GameDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -62,7 +64,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatIconModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

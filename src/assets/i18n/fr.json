@@ -14,10 +14,13 @@
     "games.addGameButton": "Ajouter un jeu",
     "games.searchPlaceHolder": "Rechercher un jeu...",
 
-    "addGameDialog.title": "Ajouter un jeu",
-    "addGameDialog.validateButton": "Valider",
-    "addGameDialog.cancelButton": "Annuler",
-    "addGameDialog.namePlaceHolder": "Nom",
-    "addGameDialog.descriptionPlaceHolder": "Description",
-    "addGameDialog.releaseDatePlaceHolder": "Date de sortie"
+    "gameDialog.createTitle": "Ajouter un jeu",
+    "gameDialog.updateTitle": "Mettre à jour le jeu",
+    "gameDialog.createButton": "Créer",
+    "gameDialog.updateButton": "Mettre à jour",
+    "gameDialog.cancelButton": "Annuler",
+    "gameDialog.namePlaceHolder": "Nom",
+    "gameDialog.descriptionPlaceHolder": "Description",
+    "gameDialog.releaseDatePlaceHolder": "Date de sortie",
+    "gameDialog.editorPlaceHolder": "Editeur du jeu"
 }

@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { GameService } from 'src/app/services/game.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {MatDialog} from '@angular/material/dialog';
-import { AddGameDialogComponent } from '../add-game-dialog/add-game-dialog.component';
+import { GameDialogComponent } from '../game-dialog/game-dialog.component';
 
 @Component({
   selector: 'app-games-view',
@@ -35,8 +35,8 @@ export class GamesViewComponent implements OnInit{
   }
 
   openAddGameDialog(){
-    const dialogRef = this.dialog.open(AddGameDialogComponent);
-
+    const dialogRef = this.dialog.open(GameDialogComponent, {data: { dialogType: "update"}});
+    
     dialogRef.afterClosed().subscribe(result => {
       if (result == null)
         console.log("Cancelled");
