@@ -24,6 +24,7 @@ export class GamesViewComponent implements OnInit{
   pageIndex = 0;
   totalGames = 0;
   logos: any[] = [];
+  searchTerm!: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
@@ -70,18 +71,33 @@ export class GamesViewComponent implements OnInit{
       if (result != null){
         const gameToUpdate: GameDto = result.game;
         const medias: File[] = result.medias;
-        //Logo
 
         this.gameService.update(gameToUpdate).subscribe(
           result => this.getGames()
         )
-
-        //medias
       }
     })
   }
 
-  searchGameByName(event: any): void{ }
+  searchGameByName(): void{
+    console.log(this.searchTerm)
+    this.gameService.getGames(0, 5, this.searchTerm).subscribe(response => {
+      this.dataSource.data = response.content.map(
+        gameDto => {
+          return {
+            id: gameDto.id,
+            name: gameDto.name, 
+            description: gameDto.description,
+            releaseDate: gameDto.releaseDate,
+            editorId: gameDto.editorId,
+            logo: null
+          }
+        }
+      );
+      this.totalGames = response.totalElements;
+      this.getLogos();
+    });
+  }
   
   getGames(event: (PageEvent | null) = null) {
     this.pageSize = event?.pageSize ?? this.pageSize;
@@ -121,5 +137,9 @@ export class GamesViewComponent implements OnInit{
         })
       })
     )
+  }
+
+  navigateTo(e: any): void{
+    ;
   }
 }

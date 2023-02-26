@@ -13,10 +13,13 @@ export class GameService {
 
   constructor(private http: HttpClient) { }
 
-  public getGames(pageIndex: number, pageSize: number): Observable<Page<GameDto>> {
-      const params = new HttpParams()
+  public getGames(pageIndex: number, pageSize: number, name: string | null = null): Observable<Page<GameDto>> {
+      let params = new HttpParams()
         .set('size', pageSize)
         .set('page', pageIndex);
+
+      if (name)
+        params = params.set('name', name);
 
       return this.http.get<Page<GameDto>>(`${API_URL}/game`, {params});
   }

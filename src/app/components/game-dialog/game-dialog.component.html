@@ -7,15 +7,14 @@
         <form [formGroup]="form" class="normal-form">
           <p>
             <label class="btn btn-secondary btn-file">Logo<br>
-              <input #logoUpload type="file" (change)="onLogoSelected($event)" multiple name="photo" accept=".png,.jpg,.jpeg"/>
-              <input type="hidden" name="logoHidden" formControlName="logo"/>
+              <input *ngIf="dialogType == 'create'" #logoUpload type="file" (change)="onLogoSelected($event)" multiple name="photo" accept=".png,.jpg,.jpeg"/>
+              <input *ngIf="dialogType == 'create'" type="hidden" name="logoHidden" formControlName="logo"/>
             </label>
-          <mat-error *ngIf="!logo"><br />Le logo est obligatoire.</mat-error>
+          <mat-error *ngIf="!logo"><br />{{ 'gameDialog.requiredLogo' | translate }}</mat-error>
           <p>
           <div class="preview" *ngIf="logo">
-                <img width="100" *ngIf="isImage(logo.file)" [src]="logo.preview">
-                <video width="100" *ngIf="isVideo(logo.file)" [src]="logo.preview" controls></video>
-                <button mat-flat-button color="warn" (click)="deleteLogo()">
+                <img width="100" *ngIf="logo.file" [src]="logo.preview">
+                <button *ngIf="dialogType == 'create'" mat-flat-button color="warn" (click)="deleteLogo()">
                   <mat-icon>
                     cancel
                   </mat-icon>
@@ -25,8 +24,8 @@
                 <mat-form-field class="name" >
                   <mat-label>{{ 'gameDialog.namePlaceHolder' | translate }}</mat-label>
                   <input formControlName="name" name="name" matInput placeholder="Ex: De LaMarre" required/>
-                  <mat-error *ngIf="form.get('name')!.dirty && form.get('name')!.errors?.['required']"><br />Le name est obligatoire.</mat-error>
-                  <mat-error *ngIf="form.get('name')!.dirty && form.get('name')!.errors?.['minlength']"><br />Le name doit avoir au moins 2 caractères.</mat-error>
+                  <mat-error *ngIf="form.get('name')!.dirty && form.get('name')!.errors?.['required']"><br />{{ 'gameDialog.requiredName' | translate }}</mat-error>
+                  <mat-error *ngIf="form.get('name')!.dirty && form.get('name')!.errors?.['minlength']"><br />{{ 'gameDialog.minLength' | translate }}</mat-error>
                 </mat-form-field>
             </p>
 
@@ -34,7 +33,7 @@
                 <mat-form-field class="description">
                   <mat-label>{{ 'gameDialog.descriptionPlaceHolder' | translate }}</mat-label>
                   <input formControlName="description" name="description" matInput placeholder="Description" required/>
-                  <mat-error *ngIf="form.get('description')!.dirty && form.get('description')!.errors?.['required']"><br />La description est obligatoire.</mat-error>
+                  <mat-error *ngIf="form.get('description')!.dirty && form.get('description')!.errors?.['required']"><br />{{ 'gameDialog.requiredDescription' | translate }}</mat-error>
                 </mat-form-field>
             </p>
 
@@ -44,28 +43,29 @@
                   <input matInput [matDatepicker]="picker" formControlName="releaseDate" name="releaseDate" matInput placeholder="Date de sortie" required>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                  <mat-error *ngIf="form.get('releaseDate')!.dirty && form.get('releaseDate')!.errors?.['required']"><br />La date de sortie est obligatoire.</mat-error>
+                  <mat-error *ngIf="form.get('releaseDate')!.dirty && form.get('releaseDate')!.errors?.['required']"><br />{{ 'gameDialog.requiredReleaseDate' | translate }}</mat-error>
                 </mat-form-field>
             </p>
 
             <mat-form-field class="editor" appearance="fill">
               <mat-label>{{ 'gameDialog.editorPlaceHolder' | translate }}</mat-label>
-              <mat-select  [(value)]="selectedEditor">
+              <mat-select formControlName="editor" required ngModel name="editor">
                 <mat-option *ngFor="let editor of editorList" [value]="editor.id">
                   {{editor.name}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="form.get('editor')!.dirty && form.get('editor')!.errors?.['required']"><br />{{ 'gameDialog.requiredReleaseDate' | translate }}</mat-error>
             </mat-form-field>
             <p>
-              <label class="btn btn-secondary btn-file">Ajouter un média<br>
-                <input #fileUpload type="file" (change)="onFileSelected($event)" multiple name="photo" accept=".png,.jpg,.jpeg,.mp4,.mkv"/>
+              <label class="btn btn-secondary btn-file">Medias<br>
+                <input *ngIf="dialogType == 'create'" #fileUpload type="file" (change)="onFileSelected($event)" multiple name="photo" accept=".png,.jpg,.jpeg,.mp4,.mkv"/>
               </label>
             </p> 
             <div class="preview" *ngIf="fileList.length > 0">
                 <div *ngFor="let file of fileList" class="thumbnail">
                   <img width="100" *ngIf="isImage(file.file)" [src]="file.preview">
                   <video width="100" *ngIf="isVideo(file.file)" [src]="file.preview" controls></video>
-                  <button mat-flat-button color="warn" (click)="deleteFile(file)">
+                  <button *ngIf="dialogType == 'create'" mat-flat-button color="warn" (click)="deleteFile(file)">
                     <mat-icon>
                       cancel
                     </mat-icon>

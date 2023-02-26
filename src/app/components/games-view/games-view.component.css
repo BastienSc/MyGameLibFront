@@ -1,0 +1,8 @@
+.my-form-field  {
+    flex-direction: row;
+    width: 600px;
+}
+  
+.mat-mdc-form-field {
+    display: inline
+  }

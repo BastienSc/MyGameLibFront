@@ -7,6 +7,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GameDialogDto } from 'src/app/models/gameDialogDto';
 import { GameService } from 'src/app/services/game.service';
 import { GameDto } from 'src/app/models/gameDto';
+import { MediaService } from 'src/app/services/media.service';
 
 
 @Component({
@@ -25,10 +26,11 @@ export class GameDialogComponent implements OnInit{
   logo: any = null;
   currentGameId: number | null;
   game!: GameDto | null;
-  selectedEditor!: number;
+  selectedEditor: number |null= null;
 
   constructor(private dialogRef: MatDialogRef<GameDialogComponent>, 
               private editorService: EditorService, 
+              private mediaService: MediaService,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private gameService: GameService){
     this.form = GameDialogComponent.buildForm();
@@ -43,10 +45,9 @@ export class GameDialogComponent implements OnInit{
       console.log("update")
       this.gameService.getById(this.currentGameId ?? -1).subscribe(result => {
         this.game = result;
-        this.fillFormWhenUpdating()
+        this.getMedias();
+        this.fillFormWhenUpdating();
       });
-
-
     }
 
     this.editorService.getAllEditors()
@@ -57,6 +58,23 @@ export class GameDialogComponent implements OnInit{
       );
       console.log(this.game)
     
+  }
+
+  getMedias(): void{
+    this.gameService.getLogoId(this.currentGameId ?? -1).subscribe(
+      logoId => this.mediaService.getById(logoId[0]).subscribe(logo => {
+          const headers = logo.headers.keys();
+          const file = new File([logo.body], `${logo.headers.headers.get('file-name')}${logo.headers.headers.get('file-extension')}`, {type: logo.type});
+          
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            this.logo = {file: file, preview: e.target?.result}
+            this.form.controls['logo'].setValue(file);
+          }
+          reader.readAsDataURL(file);
+        }
+      )
+    )
   }
 
   fillFormWhenUpdating(): void {
@@ -75,9 +93,8 @@ export class GameDialogComponent implements OnInit{
       name: gameDialog.name,
       description: gameDialog.description,
       releaseDate: gameDialog.releaseDate,
-      editorId: this.selectedEditor
+      editorId: this.form.value.editor
     }
-    console.log(returnedGame);
     this.dialogRef.close({game: returnedGame, medias: this.fileList.map(f => f.file), logo: this.logo.file});
   }
 
@@ -154,7 +171,7 @@ export class GameDialogComponent implements OnInit{
       name: new FormControl("", Validators.compose([Validators.required, Validators.minLength(2)])),
       description: new FormControl("", Validators.compose([Validators.required])),
       releaseDate: new FormControl("", Validators.compose([Validators.required])),
-      editor: new FormControl("", Validators.compose([]))    
+      editor: new FormControl("", Validators.compose([Validators.required]))    
     });
   }
 }

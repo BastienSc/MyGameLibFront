@@ -11,6 +11,7 @@
     "games.releaseDate": "Release Date",
     "games.editor": "Editor",
 
+    "games.searchButton": "Search",
     "games.addGameButton": "Add a game",
     "games.searchPlaceHolder": "Search a game...",
 
@@ -22,5 +23,12 @@
     "gameDialog.namePlaceHolder": "Name",
     "gameDialog.descriptionPlaceHolder": "Description",
     "gameDialog.releaseDatePlaceHolder": "Release Date",
-    "gameDialog.editorPlaceHolder": "Game editor"
+    "gameDialog.editorPlaceHolder": "Game editor",
+
+    "gameDialog.requiredLogo": "Logo is required.",
+    "gameDialog.requiredName": "Name is required.",
+    "gameDialog.minLength": "Name's length must 2 characters minimum.",
+    "gameDialog.requiredDescription": "Description is required.",
+    "gameDialog.requiredReleaseDate": "Release date is required."
+
 }
