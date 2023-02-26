@@ -37,16 +37,6 @@ export class EditorDialogComponent implements OnInit {
         })
       });
       this.editorService.loadLogo(this.currentEditorId, (file, preview) => {this.file = {file: file, preview:preview};});
-      /*this.editorService.getLogoId(this.currentEditorId).subscribe(mediaId => {
-        this.editorService.getLogo(mediaId).subscribe(response => {
-          const file = new File([response.body], `${response.headers.get('file-name')}${response.headers.get('file-extension')}`);
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            this.file = {file: file, preview: e.target?.result};
-          }
-          reader.readAsDataURL(file);
-        });
-      })*/
     }
   }
 

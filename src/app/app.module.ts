@@ -28,6 +28,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { GameTileComponent } from './components/game-tile/game-tile.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
 import { EditorDialogComponent } from './components/editor-dialog/editor-dialog.component';
+import { EditorTileComponent } from './components/editor-tile/editor-tile.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -43,8 +44,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditorsViewComponent,
     GameDialogComponent,
     GameTileComponent,
+<<<<<<< HEAD
     GameDetailsComponent,
     EditorDialogComponent
+=======
+    EditorDialogComponent,
+    EditorTileComponent
+>>>>>>> c784c03... Add tile component for editor and improve ui
   ],
   imports: [
     AppRoutingModule,

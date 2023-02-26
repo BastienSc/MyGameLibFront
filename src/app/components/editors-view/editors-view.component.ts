@@ -76,10 +76,8 @@ export class EditorsViewComponent implements OnInit {
     this.openDialog(editorId);
   }
 
-  getEditors(event: (PageEvent | null) = null) {
-    this.pageSize = event?.pageSize ?? this.pageSize;
-    this.pageIndex = event?.pageIndex ?? this.pageIndex;
-    this.editorService.getPaginatedEditors(this.pageIndex, this.pageSize).subscribe(response => {
+  getPaginatedEditors(pageIndex:number, pageSize:number, searchTerm:string|null = null) {
+    this.editorService.getPaginatedEditors(pageIndex, pageSize).subscribe(response => {
       this.dataSource.data = response.content;
       for (let i = 0; i < this.dataSource.data.length; i++) {
         const element = this.dataSource.data[i];
@@ -90,6 +88,12 @@ export class EditorsViewComponent implements OnInit {
       console.log(this.dataSource.data);
       this.totalEditors = response.totalElements;
     });
+  }
+
+  getEditors(event: (PageEvent | null) = null) {
+    this.pageSize = event?.pageSize ?? this.pageSize;
+    this.pageIndex = event?.pageIndex ?? this.pageIndex;
+    this.getPaginatedEditors(this.pageIndex, this.pageSize);
   }
 
   switchView() {

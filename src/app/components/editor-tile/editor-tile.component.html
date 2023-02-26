@@ -1,0 +1,11 @@
+<mat-card class="editor-tile">
+  <div class="editor-tile-image-container">
+    <img *ngIf="editor.logo !== undefined" mat-card-image [src]="editor.logo">
+  </div>
+  <mat-card-header class="editor-tile-header">
+    <mat-card-title>{{ editor.name }}</mat-card-title>
+  </mat-card-header>
+  <button mat-icon-button color="primary" (click)="openEditGameDialog()">
+    <mat-icon>edit</mat-icon>
+  </button>
+</mat-card>
