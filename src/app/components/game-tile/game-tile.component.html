@@ -10,6 +10,7 @@
         <i>Description :</i>
         <p>{{ game.description }}</p><br>
         <p>{{ 'gameDialog.releaseDatePlaceHolder' | translate }} : {{ game.releaseDate | date }}</p>
+        <p>{{ 'gameDialog.editorPlaceHolder' | translate }} : {{ game.editor?.name }}</p>
       </mat-card-content>
     </div>
     <button mat-icon-button color="primary" (click)="openEditGameDialog()">

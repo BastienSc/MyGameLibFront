@@ -1,0 +1,10 @@
+.game-card {
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .logo{
+    height:400px;
+    width: 400px;
+  }

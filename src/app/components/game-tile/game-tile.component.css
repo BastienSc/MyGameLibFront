@@ -7,6 +7,12 @@
     display: flex;
 }
 
+.game-tile:hover{
+    cursor: pointer;
+    zoom: 110%;
+    filter: brightness(0.7);
+}
+
 .game-tile-content {
     display: flex;
     flex-direction: row;
