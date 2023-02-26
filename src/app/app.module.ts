@@ -44,13 +44,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditorsViewComponent,
     GameDialogComponent,
     GameTileComponent,
-<<<<<<< HEAD
     GameDetailsComponent,
-    EditorDialogComponent
-=======
     EditorDialogComponent,
     EditorTileComponent
->>>>>>> c784c03... Add tile component for editor and improve ui
   ],
   imports: [
     AppRoutingModule,
