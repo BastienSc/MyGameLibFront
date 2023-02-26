@@ -4,13 +4,14 @@ import { Page } from '../models/page';
 import { Observable, of, map, tap} from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { EditorDto } from '../models/editorDto';
+import { MediaService } from 'src/app/services/media.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditorService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private mediaService:MediaService) { }
 
   public getById(id: number): Observable<EditorDto>{
     return this.http.get<EditorDto>(`${API_URL}/editor/${id}`);
@@ -22,11 +23,15 @@ export class EditorService {
     )
   }
 
-  public getPaginatedEditors(pageIndex: number | null, pageSize: number | null): Observable<Page<EditorDto>>{
+  public getPaginatedEditors(pageIndex: number | null, pageSize: number | null, searchTerm: string | null = null): Observable<Page<EditorDto>>{
     if (pageIndex != null && pageSize != null){
       const params = new HttpParams()
       .set('size', pageSize)
       .set('page', pageIndex);
+
+      if (searchTerm) {
+        params.set('name', searchTerm);
+      }
 
       return this.http.get<Page<EditorDto>>(`${API_URL}/editor`, {params});
     }
@@ -49,30 +54,9 @@ export class EditorService {
     return this.http.get<number>(`${API_URL}/editor/${id}/logo`);
   }
 
-  public getLogo(mediaId:number): Observable<any>{
-    /*/return this.http.get<Blob>(`${API_URL}/media/${mediaId}/download`)/*.pipe(
-      tap( // Log the result or error
-      {
-        next: (data) => console.log(data),
-        error: (error) => console.log(error)
-      }
-      )
-    );*/;
-    /*const t = fetch(`${API_URL}/media/${mediaId}/download`).then(response => response.blob).then(blob => {
-      return new File([blob], fileName+'.'+   blob.type.split('/')[1]) ;
-    });*/
-    var headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/octet-stream');
-    headers.append('Accept', 'application/octet-stream');
-    headers.append('Content-Disposition', 'attachment');
-    headers
-
-    return this.http.get(`${API_URL}/media/${mediaId}/download`,  {headers: headers, observe:'response' as 'response', responseType: 'arraybuffer'});
-  }
-
   public loadLogo(editorId:number, callback:(file:File, preview:string|ArrayBuffer|null|undefined)=>void) {
     this.getLogoId(editorId).subscribe(mediaId => {
-      this.getLogo(mediaId).subscribe(response => {
+      this.mediaService.getById(mediaId).subscribe(response => {
         const file = new File([response.body], `${response.headers.get('file-name')}${response.headers.get('file-extension')}`);
         const reader = new FileReader();
         reader.onload = (e) => {

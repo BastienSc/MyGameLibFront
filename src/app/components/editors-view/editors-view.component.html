@@ -1,18 +1,17 @@
 
 <div class="table-toolbar">
   <button  mat-flat-button color="warn" (click)="addEditor()">{{ 'editors.addEditorButton' | translate }}</button>
+  <button (click)="switchView()" mat-fab color="warn">
+    <em class="material-icons" *ngIf="view === 'card'">list</em>
+    <em class="material-icons" *ngIf="view === 'list'">view_stream</em>
+  </button>
 </div>
 
 <section [ngSwitch]="view">
 
   <!-- Card view -->
-  <section *ngSwitchCase="'card'" style="display: flex;">
-    <mat-card *ngFor="let editor of dataSource.data" style="flex: 1 1 auto;">
-      <mat-card-header>
-        <img *ngIf="editor.logo !== undefined" mat-card-image [src]="editor.logo" width="100">
-        <mat-card-title>{{ editor.name }}</mat-card-title>
-      </mat-card-header>
-    </mat-card>
+  <section *ngSwitchCase="'card'" style="display: flex;" class="editor-tile-container">
+    <app-editor-tile *ngFor="let editor of dataSource.data" (updateButtonEvent)="editEdior(editor.id)" [editor]="editor"></app-editor-tile>
   </section>
 
   <!-- List view -->
@@ -30,8 +29,8 @@
       </ng-container>
       <ng-container matColumnDef="update">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let game">
-          <button mat-icon-button color="primary" (click)="editEdior(game.id)">
+        <mat-cell *matCellDef="let editor">
+          <button mat-icon-button color="primary" (click)="editEdior(editor.id)">
             <mat-icon>edit</mat-icon>
           </button>
         </mat-cell>
@@ -39,11 +38,8 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-    <mat-paginator [pageSize]="pageSize" showFirstLastButtons [pageSizeOptions]="pageSizeOptions" [length]="totalEditors" (page)="getEditors($event)"></mat-paginator>
   </section>
 </section>
 
-<button (click)="switchView()" mat-fab color="warn">
-  <em class="material-icons" *ngIf="view === 'card'">list</em>
-  <em class="material-icons" *ngIf="view === 'list'">view_stream</em>
-</button>
+<mat-paginator [pageSize]="pageSize" showFirstLastButtons [pageSizeOptions]="pageSizeOptions" [length]="totalEditors" (page)="getEditors($event)">
+</mat-paginator>
