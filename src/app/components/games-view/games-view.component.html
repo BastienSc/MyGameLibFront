@@ -42,7 +42,7 @@
     </mat-table>
     
     <div class="game-tile-container" *ngIf="viewType==1">
-      <app-game-tile *ngFor="let game of dataSource.data;" [game]="game" class="game-tile"/>
+      <app-game-tile (updateButtonEvent)="openEditGameDialog(game.id)" *ngFor="let game of dataSource.data;" [game]="game" class="game-tile"/>
     </div>
     <mat-paginator [pageSize]="pageSize" showFirstLastButtons [pageSizeOptions]="pageSizeOptions" [length]="totalGames" (page)="getGames($event)"></mat-paginator>
 </div>

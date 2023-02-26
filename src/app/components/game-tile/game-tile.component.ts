@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Game } from 'src/app/models/Game';
 
 @Component({
@@ -8,6 +8,11 @@ import { Game } from 'src/app/models/Game';
 })
 export class GameTileComponent {
     @Input() game!: Game;
+    @Output() updateButtonEvent = new EventEmitter<void>();
 
     constructor() {}
+
+    openEditGameDialog(){
+      this.updateButtonEvent.emit()
+    }
 }

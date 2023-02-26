@@ -12,4 +12,7 @@
         <p>{{ 'gameDialog.releaseDatePlaceHolder' | translate }} : {{ game.releaseDate | date }}</p>
       </mat-card-content>
     </div>
+    <button mat-icon-button color="primary" (click)="openEditGameDialog()">
+      <mat-icon>edit</mat-icon>
+    </button>
   </mat-card>
