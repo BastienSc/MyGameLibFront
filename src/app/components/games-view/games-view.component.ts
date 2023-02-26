@@ -86,7 +86,7 @@ export class GamesViewComponent implements OnInit{
   searchGameByName(): void{
     this.gameService.getGames(0, 5, this.searchTerm).subscribe(response => {
       this.dataSource.data = response.content.map(
-        gameDto => {
+        (gameDto: GameDto) => {
           const game: Game = {
             id: gameDto.id,
             name: gameDto.name,
@@ -110,7 +110,7 @@ export class GamesViewComponent implements OnInit{
     this.pageIndex = event?.pageIndex ?? this.pageIndex;
     this.gameService.getGames(this.pageIndex, this.pageSize).subscribe(response => {
       this.dataSource.data = response.content.map(
-        gameDto => {
+        (gameDto: GameDto) => {
           const game: Game = {
             id: gameDto.id,
             name: gameDto.name,

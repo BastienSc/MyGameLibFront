@@ -43,7 +43,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditorsViewComponent,
     GameDialogComponent,
     GameTileComponent,
-    GameDetailsComponent
+    GameDetailsComponent,
     EditorDialogComponent
   ],
   imports: [
