@@ -25,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core'
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { GameTileComponent } from './components/game-tile/game-tile.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,7 +39,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DrawerComponent,
     GamesViewComponent,
     EditorsViewComponent,
-    GameDialogComponent
+    GameDialogComponent,
+    GameTileComponent
   ],
   imports: [
     AppRoutingModule,
