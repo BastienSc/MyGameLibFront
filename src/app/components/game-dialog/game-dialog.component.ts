@@ -42,7 +42,6 @@ export class GameDialogComponent implements OnInit{
   ngOnInit(): void {
     //Si c'est un formulaire de mise à jour, il faut charger les données du jeu pour les afficher
     if (this.dialogType == "update"){
-      console.log("update")
       this.gameService.getById(this.currentGameId ?? -1).subscribe(result => {
         this.game = result;
         this.getMedias();
@@ -56,7 +55,6 @@ export class GameDialogComponent implements OnInit{
         this.selectedEditor = this.game?.editorId ?? -1
       }
       );
-      console.log(this.game)
     
   }
 
@@ -87,7 +85,6 @@ export class GameDialogComponent implements OnInit{
   }
 
   validate(gameDialog: any): void{
-    console.log("event = ", gameDialog)
     const returnedGame = {
       id: this.currentGameId,
       name: gameDialog.name,
@@ -144,7 +141,6 @@ export class GameDialogComponent implements OnInit{
     if (fileIndex > -1)
       this.fileList.splice(fileIndex, 1);
 
-    console.log(fileIndex, this.fileList)
   }
 
   isImage(file: File | null): boolean{
