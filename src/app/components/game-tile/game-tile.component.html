@@ -1,0 +1,15 @@
+<mat-card class="game-tile">
+    <div class="game-tile-image-container">
+      <img [src]="game.logo" alt="Game Logo">
+    </div>
+    <div class="game-tile-info">
+      <mat-card-header>
+        <mat-card-title><h3>{{ game.name }}</h3></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <i>Description :</i>
+        <p>{{ game.description }}</p><br>
+        <p>{{ 'gameDialog.releaseDatePlaceHolder' | translate }} : {{ game.releaseDate | date }}</p>
+      </mat-card-content>
+    </div>
+  </mat-card>

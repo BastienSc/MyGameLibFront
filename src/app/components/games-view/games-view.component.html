@@ -1,12 +1,14 @@
 <div>
     <div class="toolbar">
-        <mat-form-field class="my-form-field">
+        <mat-form-field class="form-field-toolbar">
             <input [(ngModel)]="searchTerm" matInput placeholder="{{ 'games.searchPlaceHolder' | translate }}">
         </mat-form-field>        
         <button  mat-flat-button color="primary" (click)="searchGameByName()">{{ 'games.searchButton' | translate }}</button>
         <button  mat-flat-button color="warn" (click)="openAddGameDialog()">{{ 'games.addGameButton' | translate }}</button>
-    </div>
-    <mat-table class="my-table" [dataSource]="dataSource" matSort strect>
+        <button  mat-flat-button color="secondary" (click)="switchViewType()">{{ 'games.switchViewTypeButton' | translate }}</button>
+
+      </div>
+    <mat-table *ngIf="viewType==0" class="my-table" [dataSource]="dataSource" matSort strect>
       <ng-container matColumnDef="logo">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Logo</mat-header-cell>
         <mat-cell *matCellDef="let game"><img width="65" [src]="game.logo"/></mat-cell>
@@ -38,5 +40,9 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="'/editors'" class="row-hover"></mat-row>
     </mat-table>
+    
+    <div class="game-tile-container" *ngIf="viewType==1">
+      <app-game-tile *ngFor="let game of dataSource.data;" [game]="game" class="game-tile"/>
+    </div>
     <mat-paginator [pageSize]="pageSize" showFirstLastButtons [pageSizeOptions]="pageSizeOptions" [length]="totalGames" (page)="getGames($event)"></mat-paginator>
 </div>

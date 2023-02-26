@@ -14,6 +14,7 @@
     "games.searchButton": "Rechercher",
     "games.addGameButton": "Ajouter un jeu",
     "games.searchPlaceHolder": "Rechercher un jeu...",
+    "games.switchViewTypeButton:": "Changer de vue",
 
     "gameDialog.createTitle": "Ajouter un jeu",
     "gameDialog.updateTitle": "Mettre à jour le jeu",

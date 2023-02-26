@@ -138,6 +138,10 @@ export class GamesViewComponent implements OnInit{
       })
     )
   }
+  
+  switchViewType(): void{
+    this.viewType = this.viewType == ViewType.list ? ViewType.tile : ViewType.list;
+  }
 
   navigateTo(e: any): void{
     ;

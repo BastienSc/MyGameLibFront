@@ -13,7 +13,8 @@
 
     "games.searchButton": "Search",
     "games.addGameButton": "Add a game",
-    "games.searchPlaceHolder": "Search a game...",
+    "games.searchPlaceHolder": "Search a game...", 
+    "games.switchViewTypeButton:": "Switch view type",
 
     "gameDialog.createTitle": "Add a game",
     "gameDialog.updateTitle": "Update the game",
