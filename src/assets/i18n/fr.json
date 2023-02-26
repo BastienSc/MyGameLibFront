@@ -30,5 +30,12 @@
     "gameDialog.requiredName": "Le nom est obligatoire.",
     "gameDialog.minLength": "La longueur du nom est de 2 caractères minimum.",
     "gameDialog.requiredDescription": "La description est obligatoire.",
-    "gameDialog.requiredReleaseDate": "La date de sortie est obligatoire."
+    "gameDialog.requiredReleaseDate": "La date de sortie est obligatoire.",
+
+    "editors.logo": "Logo",
+    "editors.name": "Nom",
+
+    "editors.addEditorButton": "Ajouter un éditeur",
+    "editorDialog.createTitle": "Ajouter un éditeur",
+    "editorDialog.updateTitle": "Mettre à jour l'éditeur"
 }
