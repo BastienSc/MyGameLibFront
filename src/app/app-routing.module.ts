@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditorsViewComponent } from './components/editors-view/editors-view.component';
+import { GameDetailsComponent } from './components/game-details/game-details.component';
 import { GamesViewComponent } from './components/games-view/games-view.component';
 
 const routes: Routes = [
@@ -12,11 +13,14 @@ const routes: Routes = [
     path: "editors",
     component: EditorsViewComponent
   },
-  
+  {
+    path: "game/:id",
+    component: GameDetailsComponent
+  },
   {
     path: '**',
     redirectTo: 'games'
-  }
+  },
 ];
 
 @NgModule({

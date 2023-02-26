@@ -1,0 +1,26 @@
+<mat-card class="game-card">
+    <img mat-card-image class="logo" src="{{logo}}" alt="Game Logo">
+  
+    <mat-card-content>
+      <h1 class="game-name">{{game.name}}</h1>
+      <p><i>Description :</i></p>
+      <p class="game-description">{{game.description}}</p>
+      <p><i>Editeur :</i></p>
+      <p class="game-description">{{editor.name}}</p>
+      <div class="game-media-container">
+        <h2 class="game-media-heading">Media</h2>
+  
+        <div class="game-media-list">
+          <div class="game-media-item" *ngFor="let picture of pictures">
+            <img class="game-media-picture" src="{{picture.url}}" alt="Game Picture">
+          </div>
+  
+          <div class="game-media-item" *ngFor="let video of videos">
+            <iframe class="game-media-video" src="{{video.url}}"></iframe>
+          </div>
+        </div>
+      </div>
+  
+      <p class="game-release-date">Release Date: {{game.releaseDate | date:'mediumDate'}}</p>
+    </mat-card-content>
+  </mat-card>

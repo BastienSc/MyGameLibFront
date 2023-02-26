@@ -28,4 +28,8 @@ export class EditorService {
     }
     else return this.http.get<Page<EditorDto>>(`${API_URL}/editor`);
   }
+
+  public getById(editorId: number): Observable<EditorDto>{
+    return this.http.get<EditorDto>(`${API_URL}/editor/${editorId}`);
+  }
 }

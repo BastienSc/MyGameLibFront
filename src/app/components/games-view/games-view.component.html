@@ -25,9 +25,9 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'games.releaseDate' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let game">{{ game.releaseDate | date }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="editorId">
+      <ng-container matColumnDef="editor">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'games.editor' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let game">{{ game.editorId }}</mat-cell>
+        <mat-cell *matCellDef="let game">{{ game.editor.name }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="update">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
@@ -38,7 +38,7 @@
         </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="'/editors'" class="row-hover"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="row-hover" [routerLink]="'/game/' + row.id"></mat-row>
     </mat-table>
     
     <div class="game-tile-container" *ngIf="viewType==1">

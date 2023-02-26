@@ -7,7 +7,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {MatDialog} from '@angular/material/dialog';
 import { GameDialogComponent } from '../game-dialog/game-dialog.component';
 import { MediaService } from 'src/app/services/media.service';
-import { Game } from 'src/app/models/Game';
+import { Game } from 'src/app/models/game';
+import { EditorService } from 'src/app/services/editor.service';
 
 @Component({
   selector: 'app-games-view',
@@ -17,7 +18,7 @@ import { Game } from 'src/app/models/Game';
 export class GamesViewComponent implements OnInit{
   public viewType: ViewType = ViewType.list;
 
-  displayedColumns: string[] = ['logo', 'name', 'description', 'releaseDate', 'editorId', 'update'];
+  displayedColumns: string[] = ['logo', 'name', 'description', 'releaseDate', 'editor', 'update'];
   dataSource: MatTableDataSource<Game>;
   pageSizeOptions = [5, 10, 20];
   pageSize = 5;
@@ -28,7 +29,10 @@ export class GamesViewComponent implements OnInit{
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private gameService: GameService, private dialog: MatDialog, private mediaService: MediaService) {
+  constructor(private gameService: GameService, 
+    private dialog: MatDialog, 
+    private mediaService: MediaService,
+    private editorService: EditorService) {
     this.dataSource = new MatTableDataSource<Game>([]);
   }
 
@@ -80,18 +84,20 @@ export class GamesViewComponent implements OnInit{
   }
 
   searchGameByName(): void{
-    console.log(this.searchTerm)
     this.gameService.getGames(0, 5, this.searchTerm).subscribe(response => {
       this.dataSource.data = response.content.map(
         gameDto => {
-          return {
+          const game: Game = {
             id: gameDto.id,
             name: gameDto.name, 
             description: gameDto.description,
             releaseDate: gameDto.releaseDate,
-            editorId: gameDto.editorId,
             logo: null
           }
+          this.editorService.getById(gameDto.editorId).subscribe(
+            editor => game.editor = editor
+          )
+          return game;
         }
       );
       this.totalGames = response.totalElements;
@@ -105,14 +111,17 @@ export class GamesViewComponent implements OnInit{
     this.gameService.getGames(this.pageIndex, this.pageSize).subscribe(response => {
       this.dataSource.data = response.content.map(
         gameDto => {
-          return {
+          const game: Game = {
             id: gameDto.id,
             name: gameDto.name, 
             description: gameDto.description,
             releaseDate: gameDto.releaseDate,
-            editorId: gameDto.editorId,
             logo: null
           }
+          this.editorService.getById(gameDto.editorId).subscribe(
+            editor => game.editor = editor
+          )
+          return game;
         }
       );
       this.totalGames = response.totalElements;
@@ -121,12 +130,10 @@ export class GamesViewComponent implements OnInit{
   }
 
   getLogos(): void{
-    console.log(this.dataSource.data)
     this.dataSource.data.forEach(
       game => this.gameService.getLogoId(game.id).subscribe(logoId => {
           this.mediaService.getById(logoId[0]).subscribe(logo => {
           const headers = logo.headers.keys();
-          console.log(logo)
           const file = new File([logo.body], `${logo.headers.headers.get('file-name')}${logo.headers.headers.get('file-extension')}`, {type: logo.type});
           
           const reader = new FileReader();

@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { GameTileComponent } from './components/game-tile/game-tile.component';
+import { GameDetailsComponent } from './components/game-details/game-details.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -40,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     GamesViewComponent,
     EditorsViewComponent,
     GameDialogComponent,
-    GameTileComponent
+    GameTileComponent,
+    GameDetailsComponent
   ],
   imports: [
     AppRoutingModule,
