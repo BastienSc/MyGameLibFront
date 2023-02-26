@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { GameTileComponent } from './components/game-tile/game-tile.component';
+import { EditorDialogComponent } from './components/editor-dialog/editor-dialog.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -40,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     GamesViewComponent,
     EditorsViewComponent,
     GameDialogComponent,
-    GameTileComponent
+    GameTileComponent,
+    EditorDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -49,7 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatPaginatorModule,
     MatTableModule,
     BrowserAnimationsModule,
-    HttpClientModule, 
+    HttpClientModule,
     TranslateModule.forRoot({
       defaultLanguage: 'fr',
       loader: {

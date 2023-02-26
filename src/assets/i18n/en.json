@@ -13,7 +13,7 @@
 
     "games.searchButton": "Search",
     "games.addGameButton": "Add a game",
-    "games.searchPlaceHolder": "Search a game...", 
+    "games.searchPlaceHolder": "Search a game...",
     "games.switchViewTypeButton:": "Switch view type",
 
     "gameDialog.createTitle": "Add a game",
@@ -30,6 +30,12 @@
     "gameDialog.requiredName": "Name is required.",
     "gameDialog.minLength": "Name's length must 2 characters minimum.",
     "gameDialog.requiredDescription": "Description is required.",
-    "gameDialog.requiredReleaseDate": "Release date is required."
+    "gameDialog.requiredReleaseDate": "Release date is required.",
 
+    "editors.logo": "Logo",
+    "editors.name": "Name",
+    "editors.addEditorButton": "Add an editor",
+
+    "editorDialog.createTitle": "Add and editor",
+    "editorDialog.updateTitle": "Update the editor"
 }

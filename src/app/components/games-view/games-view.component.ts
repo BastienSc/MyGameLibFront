@@ -7,7 +7,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {MatDialog} from '@angular/material/dialog';
 import { GameDialogComponent } from '../game-dialog/game-dialog.component';
 import { MediaService } from 'src/app/services/media.service';
-import { Game } from 'src/app/models/Game';
+import { Game } from 'src/app/models/game';
 
 @Component({
   selector: 'app-games-view',
@@ -40,7 +40,7 @@ export class GamesViewComponent implements OnInit{
 
   openAddGameDialog(){
     const dialogRef = this.dialog.open(GameDialogComponent);
-    
+
     dialogRef.afterClosed().subscribe(result => {
       if (result != null){
         const gameToCreate: GameDto = result.game;
@@ -66,7 +66,7 @@ export class GamesViewComponent implements OnInit{
 
   openEditGameDialog(gameId: number){
     const dialogRef = this.dialog.open(GameDialogComponent, {data: {gameId: gameId}})
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result != null){
         const gameToUpdate: GameDto = result.game;
@@ -86,7 +86,7 @@ export class GamesViewComponent implements OnInit{
         gameDto => {
           return {
             id: gameDto.id,
-            name: gameDto.name, 
+            name: gameDto.name,
             description: gameDto.description,
             releaseDate: gameDto.releaseDate,
             editorId: gameDto.editorId,
@@ -98,7 +98,7 @@ export class GamesViewComponent implements OnInit{
       this.getLogos();
     });
   }
-  
+
   getGames(event: (PageEvent | null) = null) {
     this.pageSize = event?.pageSize ?? this.pageSize;
     this.pageIndex = event?.pageIndex ?? this.pageIndex;
@@ -107,7 +107,7 @@ export class GamesViewComponent implements OnInit{
         gameDto => {
           return {
             id: gameDto.id,
-            name: gameDto.name, 
+            name: gameDto.name,
             description: gameDto.description,
             releaseDate: gameDto.releaseDate,
             editorId: gameDto.editorId,
@@ -128,7 +128,7 @@ export class GamesViewComponent implements OnInit{
           const headers = logo.headers.keys();
           console.log(logo)
           const file = new File([logo.body], `${logo.headers.headers.get('file-name')}${logo.headers.headers.get('file-extension')}`, {type: logo.type});
-          
+
           const reader = new FileReader();
           reader.onload = (e) => {
             game.logo = e.target?.result;
@@ -138,7 +138,7 @@ export class GamesViewComponent implements OnInit{
       })
     )
   }
-  
+
   switchViewType(): void{
     this.viewType = this.viewType == ViewType.list ? ViewType.tile : ViewType.list;
   }
