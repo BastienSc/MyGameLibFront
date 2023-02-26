@@ -3,7 +3,7 @@ export enum ViewType {
     tile
 }
 
-export enum mediaType{
+export enum MediaType{
     LOGO = 'LOGO',
     PICTURE = 'PICTURE',
     VIDEO = 'VIDEO'

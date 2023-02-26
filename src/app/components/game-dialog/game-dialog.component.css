@@ -1,0 +1,11 @@
+.preview{
+    display: flex;
+    align-items: flex-start;
+    text-align: center;
+}
+
+.thumbnail {
+    display: flex;
+    align-items: flex-start;
+    text-align: center;
+}

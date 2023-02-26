@@ -18,9 +18,11 @@ export class GameDialogComponent implements OnInit{
   dialogType: "create" | "update";
   form: FormGroup;
   @ViewChild('fileUpload') fileUpload!: ElementRef;
+  @ViewChild('logoUpload') logoUpload!: ElementRef;
 
   editorList: EditorDto[] = [];
   fileList: any[] = [];
+  logo: any = null;
   currentGameId: number | null;
   game!: GameDto | null;
   selectedEditor!: number;
@@ -69,13 +71,14 @@ export class GameDialogComponent implements OnInit{
   validate(gameDialog: any): void{
     console.log("event = ", gameDialog)
     const returnedGame = {
+      id: this.currentGameId,
       name: gameDialog.name,
       description: gameDialog.description,
       releaseDate: gameDialog.releaseDate,
       editorId: this.selectedEditor
     }
     console.log(returnedGame);
-    this.dialogRef.close({game: returnedGame, medias: this.fileList.map(f => f.file)});
+    this.dialogRef.close({game: returnedGame, medias: this.fileList.map(f => f.file), logo: this.logo.file});
   }
 
   cancel(): void{
@@ -88,13 +91,35 @@ export class GameDialogComponent implements OnInit{
       
       const reader = new FileReader();
 
-
       reader.onload = (e) => {
         this.fileList.push({file: newFile, preview: e.target?.result});
       }
       
       reader.readAsDataURL(newFile);
     }
+  }
+
+  onLogoSelected(event: any){
+    if (event?.target?.files && event?.target?.files[0]){
+      let newFile: File = event?.target?.files[0];
+      
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.logo = {file: newFile, preview: e.target?.result};
+      }
+      
+      reader.readAsDataURL(newFile);
+
+      this.form.controls['logo'].setValue(newFile);
+    }
+    else this.form.controls['logo'].setValue('');
+  }
+
+  deleteLogo(): void{
+    this.logo = null;
+    this.logoUpload.nativeElement.value = null;
+    this.form.controls['logo'].setValue(null);
   }
 
   deleteFile(file: any){
@@ -125,6 +150,7 @@ export class GameDialogComponent implements OnInit{
    */
   private static buildForm(): FormGroup {
     return new FormGroup({
+      logo: new FormControl("", Validators.compose([Validators.required])),
       name: new FormControl("", Validators.compose([Validators.required, Validators.minLength(2)])),
       description: new FormControl("", Validators.compose([Validators.required])),
       releaseDate: new FormControl("", Validators.compose([Validators.required])),

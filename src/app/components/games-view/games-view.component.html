@@ -6,6 +6,10 @@
         <button  mat-flat-button color="warn" (click)="openAddGameDialog()">{{ 'games.addGameButton' | translate }}</button>
     </div>
     <mat-table [dataSource]="dataSource" matSort strect>
+      <ng-container matColumnDef="logo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Logo</mat-header-cell>
+        <mat-cell *matCellDef="let game"><img width="65" [src]="game.logo"/></mat-cell>
+      </ng-container>
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'games.name' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let game">{{ game.name }}</mat-cell>

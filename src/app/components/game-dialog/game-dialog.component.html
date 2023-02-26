@@ -1,10 +1,26 @@
 <mat-card style="text-align: center; color: darkslategray">
   <mat-card-header>
-    <mat-card-title *ngIf="dialogType=='create'"><h1>{{ 'gameDialog.createTitle' | translate }}></h1></mat-card-title>
+    <mat-card-title *ngIf="dialogType=='create'"><h1>{{ 'gameDialog.createTitle' | translate }}</h1></mat-card-title>
     <mat-card-title *ngIf="dialogType=='update'"><h1>{{ 'gameDialog.updateTitle' | translate }}{{ game?.name }}</h1></mat-card-title>
   </mat-card-header>
     <mat-card-content>
         <form [formGroup]="form" class="normal-form">
+          <p>
+            <label class="btn btn-secondary btn-file">Logo<br>
+              <input #logoUpload type="file" (change)="onLogoSelected($event)" multiple name="photo" accept=".png,.jpg,.jpeg"/>
+              <input type="hidden" name="logoHidden" formControlName="logo"/>
+            </label>
+          <mat-error *ngIf="!logo"><br />Le logo est obligatoire.</mat-error>
+          <p>
+          <div class="preview" *ngIf="logo">
+                <img width="100" *ngIf="isImage(logo.file)" [src]="logo.preview">
+                <video width="100" *ngIf="isVideo(logo.file)" [src]="logo.preview" controls></video>
+                <button mat-flat-button color="warn" (click)="deleteLogo()">
+                  <mat-icon>
+                    cancel
+                  </mat-icon>
+                </button>
+            </div>
             <p [class.errors]="form.get('name')!.invalid && (form.get('name')!.dirty || form.get('name')!.touched)">
                 <mat-form-field class="name" >
                   <mat-label>{{ 'gameDialog.namePlaceHolder' | translate }}</mat-label>
@@ -26,7 +42,6 @@
                 <mat-form-field class="releaseDate">
                   <mat-label>{{ 'gameDialog.releaseDatePlaceHolder' | translate }}</mat-label>
                   <input matInput [matDatepicker]="picker" formControlName="releaseDate" name="releaseDate" matInput placeholder="Date de sortie" required>
-                    <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   <mat-error *ngIf="form.get('releaseDate')!.dirty && form.get('releaseDate')!.errors?.['required']"><br />La date de sortie est obligatoire.</mat-error>
@@ -42,7 +57,9 @@
               </mat-select>
             </mat-form-field>
             <p>
-              <input #fileUpload type="file" (change)="onFileSelected($event)" multiple name="photo" accept=".png,.jpg,.jpeg,.mp4,.mkv"/>
+              <label class="btn btn-secondary btn-file">Ajouter un média<br>
+                <input #fileUpload type="file" (change)="onFileSelected($event)" multiple name="photo" accept=".png,.jpg,.jpeg,.mp4,.mkv"/>
+              </label>
             </p> 
             <div class="preview" *ngIf="fileList.length > 0">
                 <div *ngFor="let file of fileList" class="thumbnail">
